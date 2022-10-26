@@ -3,8 +3,7 @@ services:
   nginx:
     image: nginx:alpine
     volumes:
-      - ./www/frontend:/usr/share/nginx/html/frontend
-      - ./www/backend:/usr/share/nginx/html/backend
+      - ./www:/usr/share/nginx/html
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
       - ./log/nginx:/var/log/nginx
     ports:
@@ -13,13 +12,9 @@ services:
       - node
       - php
   node:
-    image: node:lts-alpine
-    working_dir: /usr/src/app
-    command: npm start
+    build: ./docker/node
     volumes:
       - ./www/frontend:/usr/src/app
-    expose:
-      - 3000
   php:
     build: ./docker/php
     volumes:
@@ -28,10 +23,10 @@ services:
       - mysql
   mysql:
     image: mysql:8
-#    command: --max_allowed_packet=1073741824
+    command: --max_allowed_packet=1073741824 --general-log=1 --general-log-file=/var/log/mysql/general.log
     environment:
-      MYSQL_DATABASE: vsesib
-      MYSQL_USER: vsesib
+      MYSQL_DATABASE: nsunet
+      MYSQL_USER: nsunet
       MYSQL_PASSWORD: QazWsxEdc_123
       MYSQL_ROOT_PASSWORD: root
     expose:
