@@ -1,0 +1,48 @@
+version: "3.8"
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./www/frontend:/usr/share/nginx/html/frontend
+      - ./www/backend:/usr/share/nginx/html/backend
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./log/nginx:/var/log/nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - node
+      - php
+  node:
+    image: node:lts-alpine
+    working_dir: /usr/src/app
+    command: npm start
+    volumes:
+      - ./www/frontend:/usr/src/app
+    expose:
+      - 3000
+  php:
+    build: ./docker/php
+    volumes:
+      - ./www/backend:/usr/share/nginx/html/backend
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8
+#    command: --max_allowed_packet=1073741824
+    environment:
+      MYSQL_DATABASE: vsesib
+      MYSQL_USER: vsesib
+      MYSQL_PASSWORD: QazWsxEdc_123
+      MYSQL_ROOT_PASSWORD: root
+    expose:
+      - 3306
+    volumes:
+      - mysqldata:/var/lib/mysql
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+      - ./log/mysql:/var/log/mysql
+      - ./db:/db
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysqldata:
