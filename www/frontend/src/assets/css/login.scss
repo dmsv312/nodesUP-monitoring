@@ -1,0 +1,95 @@
+
+.login {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  min-height: 100vh;
+
+  .logo-wrapper {
+    background: #337AB7;
+    flex: 0 0 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .logo {
+      width: 90%;
+      max-width: 400px;
+      margin: 10px 30px;
+    }
+  }
+  .content-wrapper {
+    flex: 0 0 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > .content {
+      width: 90%;
+      max-width: 506px;
+    }
+  }
+
+  h1 {
+    font-family: 'Acrom', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    color: #2F2D35;
+    text-transform: uppercase;
+  }
+
+  button {
+    width: 240px;
+  }
+
+  .forgot-password {
+    padding-top: 20px;
+    a {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .login {
+    flex-direction: column;
+
+    .logo-wrapper {
+      flex: 0 0 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .logo {
+        height: 70px;
+      }
+    }
+    .content-wrapper {
+      flex: 0 0 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & > .content {
+
+      }
+    }
+
+    button {
+      max-width: 240px;
+      width: 100%;
+    }
+
+  }
+}
+
+@media (max-width: 400px) {
+  .login {
+    button {
+      max-width: 400px;
+      width: 100%;
+    }
+
+  }
+}

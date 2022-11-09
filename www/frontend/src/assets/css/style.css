@@ -1,0 +1,80 @@
+@import url(../fonts/acrom/stylesheet.css);
+html, body {
+  background: #ffffff;
+  font-family: "Acrom", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #7D8592;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-family: "Acrom", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 43px;
+  color: #2F2D35;
+}
+
+a {
+  color: #337AB7;
+  text-decoration: underline;
+  cursor: pointer;
+}
+a:focus, a:hover {
+  text-decoration: none;
+  outline: none;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 27px;
+}
+
+.form-buttons {
+  padding-top: 29px;
+  margin-bottom: 27px;
+}
+
+label {
+  display: block;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  color: #7D8592;
+  margin-bottom: 5px;
+}
+
+.btn {
+  border-radius: 10px;
+  border: none;
+  height: 48px;
+  min-width: 48px;
+  box-shadow: none;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.btn:focus, .btn:hover {
+  outline: none;
+}
+.btn.btn-primary {
+  background: #337AB7;
+  color: #FFFFFF;
+}
+
+/*# sourceMappingURL=style.css.map */
