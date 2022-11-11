@@ -12,6 +12,18 @@ html, body {
   margin: 0;
 }
 
+#app {
+  & > header > .content,
+  & > footer > .content,
+  & > .content
+  {
+    height: 100%;
+    width: 90%;
+    max-width: 1380px;
+    margin: 0 auto;
+  }
+}
+
 h1 {
   font-family: 'Acrom', sans-serif;
   font-style: normal;
@@ -99,4 +111,8 @@ label {
 
     }
   }
+}
+
+.modal {
+
 }

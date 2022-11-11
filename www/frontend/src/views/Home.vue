@@ -1,16 +1,34 @@
 <template>
-  <div class="home">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link>
+  <header-content></header-content>
+  <div class="content">
+    <div class="breadcrumbs">
+      С возвращением, Константин!
     </div>
-    Home page
+    <h1>Личный кабинет</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
   </div>
+  <footer-content></footer-content>
 </template>
 
 <script>
+import HeaderContent from "@/components/header/HeaderContent";
+import FooterContent from "@/components/footer/FooterContent";
 export default {
-  name: "Home"
+  name: "Home",
+  components: {FooterContent, HeaderContent}
 }
 </script>
 
