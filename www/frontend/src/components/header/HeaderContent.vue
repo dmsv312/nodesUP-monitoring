@@ -77,6 +77,7 @@ export default {
     height: 10px;
     background: url("../../assets/images/arrow-white.svg") no-repeat center center;
     cursor: pointer;
+    transform: rotate(90deg);
   }
   .language-choice .languages {
     position: absolute;
@@ -110,7 +111,6 @@ export default {
     height: 10px;
     background: url("../../assets/images/arrow-white.svg") no-repeat center center;
     cursor: pointer;
-    transform: rotate(-90deg);
     margin-left: 10px;
   }
   .user-link:focus, .user-link:hover {
