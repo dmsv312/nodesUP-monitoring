@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="logo-wrapper">
-      <img src="../assets/images/logo-white.svg" class="logo">
+      <img src="../../assets/images/logo-white.svg" class="logo">
     </div>
     <div class="content-wrapper">
       <div class="content">
@@ -39,6 +39,7 @@ export default {
 }
 </script>
 
-<style src="../assets/css/style.css" />
-<style scoped src="../assets/css/login.css" />
-<style scoped src="../assets/css/input-text.css" />
+<style lang="scss" scoped>
+  @import 'login.scss';
+  @import '../../assets/styles/input-text.scss';
+</style>
