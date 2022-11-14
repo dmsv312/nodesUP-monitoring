@@ -49,7 +49,9 @@ export default {
     justify-content: space-between;
     flex-wrap: nowrap;
   }
-
+  .logo-link {
+    margin-right: 25px;
+  }
   .logo {
     width: 150px;
   }
