@@ -41,5 +41,7 @@ export default {
 
 <style lang="scss" scoped>
   @import 'login.scss';
+</style>
+<style lang="scss">
   @import '../../assets/styles/input-text.scss';
 </style>
