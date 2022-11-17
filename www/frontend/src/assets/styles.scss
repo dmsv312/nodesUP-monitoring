@@ -37,6 +37,7 @@ html, body {
   }
   & > .content {
     padding: 50px 0;
+    flex: 1 1 100%;
   }
 }
 
@@ -123,40 +124,6 @@ label {
   margin-bottom: 5px;
 }
 
-.btn {
-  border-radius: 10px;
-  border: none;
-  height: 48px;
-  min-width: 48px;
-  box-shadow: none;
-  cursor: pointer;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  &:focus, &:hover {
-    outline: none;
-  }
-  &.btn-primary {
-    background: #337AB7;
-    color: #FFFFFF;
-    &:hover {
-
-    }
-  }
-  &.btn-white {
-    background: #FFFFFF;
-    color: #337AB7;
-    &:hover {
-
-    }
-  }
-}
-
 .modal {
 
 }
@@ -165,6 +132,8 @@ label {
   background: #FFFFFF;
   box-shadow: 0px 6px 58px rgba(196, 203, 214, 0.103611);
   border-radius: 17px;
+  padding: 25px;
+
   & > h2, & > h3, & > h4 {
     font-style: normal;
     font-weight: 800;

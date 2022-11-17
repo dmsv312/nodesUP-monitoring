@@ -17,7 +17,7 @@
             <el-input type="password" class="w-100" v-model="password" placeholder="Введите пароль" show-password />
           </div>
           <div class="form-buttons">
-            <button class="btn btn-primary">Войти</button>
+            <el-button type="primary">Войти</el-button>
           </div>
           <div class="forgot-password">
             Забыли пароль? <router-link to="/">Восстановить</router-link>

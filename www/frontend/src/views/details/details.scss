@@ -1,0 +1,68 @@
+.load-more-button {
+  display: flex;
+  justify-content: center;
+  button {
+    width: 100%;
+    max-width: 252px;
+  }
+}
+
+.columns {
+  display: flex;
+
+  & > .content {
+    flex: 1 1 100%;
+    padding: 0 122px 0 0;
+  }
+
+  & > .sidebar {
+    flex: 0 0 389px;
+
+    .widget {
+      .el-calendar {
+        margin-top: 35px;
+      }
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+        button {
+          margin: 0 0 12px 0;
+          width: 100%;
+          max-width: 252px;
+        }
+      }
+    }
+  }
+}
+
+.calendar-controls {
+  display: flex;
+  flex-direction: row;
+
+  .prev, .next {
+    font-size: 0;
+    &:after {
+      content: '';
+      display: block;
+      width: 12px;
+      height: 21px;
+      background: url("../../assets/images/calendar-arrow.svg") no-repeat center center;
+    }
+  }
+  .prev {
+    rotate: 180deg;
+  }
+  .date {
+    flex: 1 1 100%;
+    font-family: 'Acrom', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #2F2D35;
+    text-transform: uppercase;
+  }
+}

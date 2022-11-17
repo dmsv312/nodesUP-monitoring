@@ -36,7 +36,7 @@
         <div class="widget blue need-help">
           <h2>Нужна помощь?</h2>
           <p>Отправьте запрос в техническую поддержку NSUNet</p>
-          <button class="btn btn-white">Написать</button>
+          <el-button type="white">Написать</el-button>
         </div>
       </div>
       <div class="content">
@@ -50,7 +50,7 @@
               <div class="hd-channels">Включает <b>20 НD</b> каналов</div>
             </div>
             <div class="symbol">C</div>
-            <button class="btn btn-white">Сменить</button>
+            <el-button type="white">Сменить</el-button>
           </div>
         </div>
         <div>
@@ -61,7 +61,7 @@
               <span>15.04.2021 г.</span>
             </p>
             <div class="amount">100,95 ₽</div>
-            <button class="btn btn-primary">Пополнить</button>
+            <el-button type="primary">Пополнить</el-button>
           </div>
         </div>
         <div>
