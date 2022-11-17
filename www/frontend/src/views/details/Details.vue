@@ -15,19 +15,28 @@
           счетов на оплату услуг. Итоговые начисления и оплаты могут быть скорректированы.
         </p>
         <div class="contract_details">
-          <el-table
-              :data="tableData"
-              style="width: 100%"
-              :row-class-name="tableRowClassName"
-          >
-            <el-table-column prop="date" class-name="date" label-class-name="date" label="Дата" />
-            <el-table-column prop="description" class-name="description" label-class-name="description" label="Назначение платежа" />
-            <el-table-column prop="amount" class-name="amount" label-class-name="amount" label="Сумма">
-              <template #default="scope">
-                {{ scope.row.amount > 0 ? '+ ' + scope.row.amount : '- ' + (scope.row.amount * -1) }}₽
-              </template>
-            </el-table-column>
-          </el-table>
+          <table>
+            <thead>
+              <tr>
+                <th class="date">Дата</th>
+                <th class="description">Назначение платежа</th>
+                <th class="amount">Сумма</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in items" :key="item.id" :class="{decrease : item.amount < 0}">
+                <td class="date">
+                  <div class="cell">{{ item.date }}</div>
+                </td>
+                <td class="description">
+                  <div class="cell">{{ item.description }}</div>
+                </td>
+                <td class="amount">
+                  <div class="cell">{{ item.amount > 0 ? '+ ' + item.amount : '- ' + (-1 * item.amount) }}₽</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="load-more-button">
           <el-button type="primary">Загрузить еще</el-button>
@@ -77,27 +86,31 @@ const selectDate = (val) => {
   calendar.value.selectDate(val)
 }
 
-const tableRowClassName = ({row, rowIndex}) => {
+const detailsRowClassName = ({row, rowIndex}) => {
   return row.amount < 0 ? 'decrease' : 'addition';
 }
 
-const tableData = [
+const items = [
   {
+    id: 1,
     date: '01.04.2021',
     description: 'Услуга из D+: трафик (- 236₽)',
     amount: -236,
   },
   {
+    id: 2,
     date: '26.03.2021',
     description: 'Услуга из D+: трафик (100₽)',
     amount: 100,
   },
   {
+    id: 3,
     date: '15.03.2021',
     description: 'Услуга из D+: трафик (400₽)',
     amount: 400,
   },
   {
+    id: 4,
     date: '01.03.2021',
     description: 'Услуга из D+: трафик (- 236₽)',
     amount: -236,
@@ -105,9 +118,6 @@ const tableData = [
 ]
 </script>
 
-<style lang="scss">
-@import 'details-table.scss';
-</style>
 <style lang="scss" scoped>
 @import 'details.scss';
 </style>

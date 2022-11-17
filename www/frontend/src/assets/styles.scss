@@ -82,6 +82,27 @@ a {
   }
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  thead {
+    th {
+      padding: 10px;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 24px;
+      color: #7D8592;
+    }
+  }
+  tbody {
+    td {
+      padding: 10px;
+    }
+  }
+}
+
 a.more-link {
   display: flex;
   flex-wrap: nowrap;
