@@ -74,7 +74,7 @@
                 <p>Автоматическое пополнение счета при отрицательном балансе</p>
               </div>
               <div class="status">
-
+                <el-switch v-model="auto_payment" size="large" />
               </div>
             </div>
             <div class="service-item">
@@ -83,7 +83,7 @@
                 <p>Пользуйтесь интернетом при отрицательном балансе, а платите потом</p>
               </div>
               <div class="status">
-
+                <el-switch v-model="deferred_payment" size="large" />
               </div>
             </div>
             <div class="service-item">
@@ -92,7 +92,7 @@
                 <p>Приостановите списание абонентской платы на то время, когда вы не пользуетесь интернетом</p>
               </div>
               <div class="status">
-
+                <el-switch v-model="voluntary_blocking" size="large" />
               </div>
             </div>
             <div class="service-item">
@@ -101,7 +101,7 @@
                 <p>Приостановите списание абонентской платы на то время, когда вы не пользуетесь интернетом</p>
               </div>
               <div class="status">
-
+                <el-switch v-model="ip_address" size="large" />
               </div>
             </div>
           </div>
@@ -144,13 +144,22 @@
   <footer-content></footer-content>
 </template>
 
+<script setup>
+
+</script>
 <script>
 import HeaderContent from "@/components/header/HeaderContent";
 import FooterContent from "@/components/footer/FooterContent";
 
 export default {
   name: "Home",
-  components: {FooterContent, HeaderContent}
+  components: {FooterContent, HeaderContent},
+  props: {
+    auto_payment: Boolean,
+    deferred_payment: Boolean,
+    voluntary_blocking: Boolean,
+    ip_address: Boolean
+  }
 }
 </script>
 
