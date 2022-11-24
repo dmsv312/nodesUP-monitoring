@@ -24,9 +24,11 @@
 <script>
 export default {
   name: "HeaderContent",
-  props: {
-    isShowLanguages: false
-  }
+  data() {
+    return {
+      isShowLanguages: false,
+    };
+  },
 }
 </script>
 

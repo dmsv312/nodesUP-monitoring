@@ -29,13 +29,19 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+// import { ref } from 'vue'
 
 export default {
-  name: "Login",
-  props: {
-    username: String,
-    password: String
+  name: "LoginPage",
+  // props: {
+  //   username: String,
+  //   password: String
+  // },
+  data() {
+    return {
+      username: '',
+      password: '',
+    };
   },
 }
 </script>
