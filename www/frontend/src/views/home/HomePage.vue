@@ -1,26 +1,29 @@
 <template>
-  <header-content></header-content>
+  <header-content
+    :firstname="userProfile.firstname"
+    :lastname="userProfile.lastname">
+  </header-content>
   <div class="content">
     <div class="breadcrumbs">
-      С возвращением, {{ userProfile.firstName }}!
+      С возвращением, {{ userProfile.firstname }}!
     </div>
     <h1>Личный кабинет</h1>
     <div class="dashboard">
       <div class="left-content">
         <user-profile
-        :contract-number="userProfile.contractNumber"
-        :first-name="userProfile.firstName"
-        :last-name="userProfile.lastName"
-        :middle-name="userProfile.middleName"
-        :address="userProfile.address"
-        :email="userProfile.email"
-        :phone="userProfile.phone">
+          :contract-number="userProfile.contractNumber"
+          :first-name="userProfile.firstname"
+          :last-name="userProfile.lastname"
+          :middle-name="userProfile.middlename"
+          :address="userProfile.address"
+          :email="userProfile.email"
+          :phone="userProfile.phone">
         </user-profile>
 
         <div class="widget blue need-help">
           <h2>Нужна помощь?</h2>
           <p>Отправьте запрос в техническую поддержку NSUNet</p>
-          <el-button type="white">Написать</el-button>
+          <el-button type="default">Написать</el-button>
         </div>
       </div>
       <div class="content">
@@ -49,7 +52,7 @@
 
         <div>
           <account-transactions
-              :transactions="transactions">
+            :transactions="transactions">
           </account-transactions>
         </div>
 
@@ -69,7 +72,7 @@ import ServicesList from "@/components/ServicesList";
 import AccountTransactions from "@/components/AccountTransactions";
 
 export default {
-  name: "HomePage",
+  name: "home-page",
   components: {
     FooterContent,
     HeaderContent,
@@ -79,13 +82,16 @@ export default {
     ServicesList,
     AccountTransactions,
   },
+  methods: {
+
+  },
   data() {
     return {
       userProfile: {
         contractNumber: 'NN 234-2412',
-        firstName: 'Dmitry',
-        lastName: 'Magdanov',
-        middleName: 'Viktorovich',
+        firstname: 'Dmitry',
+        lastname: 'Magdanov',
+        middlename: 'Viktorovich',
         address: 'NSK, Marksa',
         email: 'd.magdanov@nsu.ru',
         phone: '+79992223311',
@@ -155,6 +161,7 @@ export default {
       ]
     };
   },
+
 }
 </script>
 

@@ -8,7 +8,7 @@
       <div class="hd-channels">Включает <b>{{ hdChannels }} НD</b> каналов</div>
     </div>
     <div class="symbol">{{ symbol }}</div>
-    <el-button type="white">Сменить</el-button>
+    <el-button type="default">Сменить</el-button>
   </div>
 </template>
 
