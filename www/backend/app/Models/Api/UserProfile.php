@@ -21,6 +21,7 @@ use Illuminate\Support\Carbon;
  * @property string $phone
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property User $user
  * @method static \Illuminate\Database\Eloquent\Builder|UserProfile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserProfile newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserProfile query()

@@ -70,6 +70,7 @@ import UserBalance from "@/components/UserBalance";
 import RateInformation from "@/components/RateInformation";
 import ServicesList from "@/components/ServicesList";
 import AccountTransactions from "@/components/AccountTransactions";
+import axios from "axios";
 
 export default {
   name: "home-page",
@@ -82,19 +83,30 @@ export default {
     ServicesList,
     AccountTransactions,
   },
+  mounted() {
+    this.fetchUserProfile();
+  },
   methods: {
-
+    fetchUserProfile() {
+      axios.get('/api/v1/user_profile')
+          .then(response => {
+            console.log(response.data.data);
+            this.userProfile = response.data.data;
+          }).catch(error => {
+        console.log(error)
+      });
+    },
   },
   data() {
     return {
       userProfile: {
         contractNumber: 'NN 234-2412',
-        firstname: 'Dmitry',
-        lastname: 'Magdanov',
-        middlename: 'Viktorovich',
-        address: 'NSK, Marksa',
-        email: 'd.magdanov@nsu.ru',
-        phone: '+79992223311',
+        firstname: '',
+        lastname: '',
+        middlename: '',
+        address: '',
+        email: '',
+        phone: '',
       },
       userBalance: {
         lastReplenishmentDate: '15.04.2021 г.',
@@ -161,7 +173,6 @@ export default {
       ]
     };
   },
-
 }
 </script>
 

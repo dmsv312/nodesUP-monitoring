@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
@@ -18,6 +19,9 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('companies', CompanyController::class);
+
+    Route::get('/user_profile', [UserProfileController::class, 'index']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
