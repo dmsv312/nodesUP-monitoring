@@ -74,7 +74,7 @@ import HeaderContent from "@/components/header/HeaderContent";
 import FooterContent from "@/components/footer/FooterContent";
 
 export default {
-  name: "TariffPlans",
+  name: "RatesItems",
   components: {FooterContent, HeaderContent}
 }
 </script>
@@ -85,6 +85,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'tariff.scss';
+@import 'rates.scss';
 @import '../../assets/styles/rate-card';
 </style>

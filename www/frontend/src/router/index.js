@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/home/Home.vue'
 import Login from '../views/login/Login.vue'
 import Details from '../views/details/Details.vue'
-import TariffPlans from "@/views/tariffPlans/TariffPlans";
+import Rates from "@/views/rates/RatesItems";
 
 const routes = [
     {
@@ -21,9 +21,9 @@ const routes = [
         component: Details
     },
     {
-        path: '/tariff-plans',
-        name: 'TariffPlans',
-        component: TariffPlans
+        path: '/rates',
+        name: 'RatesItems',
+        component: Rates
     }
 ]
 const router = createRouter({
