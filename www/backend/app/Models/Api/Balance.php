@@ -2,7 +2,6 @@
 
 namespace App\Models\Api;
 
-use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +23,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Balance whereCreatedAt($value)
  * @method static Builder|Balance whereId($value)
  * @method static Builder|Balance whereUpdatedAt($value)
- * @mixin Eloquent
  */
 class Balance extends Model
 {
