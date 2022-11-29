@@ -15,18 +15,47 @@
         </div>
       </div>
       <router-link to="/" class="user-link">
-        <span>Константин Константинопольский</span>
+        <span>{{ firstname }} {{ lastname }}</span>
       </router-link>
+      <div>
+        <el-button type="primary" @click="logout">Logout</el-button>
+      </div>
+      <div>
+        <el-button type="primary" @click="$router.push('/companies')">Example</el-button>
+      </div>
     </div>
   </header>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "HeaderContent",
+  name: "header-content",
+  methods: {
+    logout() {
+      axios.post('/api/v1/logout').then(response => {
+        console.log(response);
+        this.removeToken();
+      }).catch(error => {
+        console.log(error)
+      });
+    },
+    removeToken() {
+      localStorage.removeItem('token');
+      this.$store.commit('setToken', '');
+      this.$store.commit('setIsAuth', false);
+    },
+  },
+  data() {
+    return {
+      isShowLanguages: false,
+    };
+  },
   props: {
-    isShowLanguages: false
-  }
+    firstname: String,
+    lastname: String,
+  },
 }
 </script>
 
