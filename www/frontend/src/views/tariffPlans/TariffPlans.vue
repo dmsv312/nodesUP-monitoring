@@ -20,7 +20,7 @@
               <div class="hd-channels">Включает <b>40 НD</b> каналов</div>
             </div>
             <div class="symbol">B</div>
-            <el-button type="white">Выбрать</el-button>
+            <el-button type="default">Выбрать</el-button>
           </div>
         </div>
         <div class="col">
@@ -33,7 +33,7 @@
               <div class="hd-channels">Включает <b>40 НD</b> каналов</div>
             </div>
             <div class="symbol">C</div>
-            <el-button type="white">Выбрать</el-button>
+            <el-button type="default">Выбрать</el-button>
           </div>
         </div>
         <div class="col">
@@ -46,7 +46,7 @@
               <div class="hd-channels">Включает <b>40 НD</b> каналов</div>
             </div>
             <div class="symbol d-symbol">D</div>
-            <el-button type="white">Выбрать</el-button>
+            <el-button type="default">Выбрать</el-button>
           </div>
         </div>
         <div class="col">
@@ -59,7 +59,7 @@
               <div class="hd-channels">Включает <b>40 НD</b> каналов</div>
             </div>
             <div class="symbol">Z</div>
-            <el-button type="white">Выбрать</el-button>
+            <el-button type="default">Выбрать</el-button>
           </div>
         </div>
       </div>
