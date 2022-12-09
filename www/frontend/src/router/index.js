@@ -4,7 +4,7 @@ import LoginPage from '../views/login/LoginPage.vue'
 import DetailsPage from '../views/details/DetailsPage.vue'
 import CompanyPage from "@/pages/CompanyPage";
 import CompanyDetail from "@/components/CompanyDetail";
-import Rates from "@/views/rates/RatesItems";
+import RatePage from "@/views/rates/RatePage";
 
 const routes = [
     {
@@ -32,8 +32,8 @@ const routes = [
     },
     {
         path: '/rates',
-        name: 'RatesItems',
-        component: Rates
+        name: 'Rates',
+        component: RatePage
     }
 ]
 const router = createRouter({
