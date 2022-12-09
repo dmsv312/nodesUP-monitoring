@@ -4,6 +4,7 @@ import LoginPage from '../views/login/LoginPage.vue'
 import DetailsPage from '../views/details/DetailsPage.vue'
 import CompanyPage from "@/pages/CompanyPage";
 import CompanyDetail from "@/components/CompanyDetail";
+import TariffPlans from "@/views/tariffPlans/TariffPlans";
 
 const routes = [
     {
@@ -22,6 +23,11 @@ const routes = [
         component: DetailsPage
     },
     {
+        path: '/tariff-plans',
+        name: 'TariffPlans',
+        component: TariffPlans
+    },
+    {
         path: '/companies',
         component: CompanyPage
     },
@@ -29,6 +35,7 @@ const routes = [
         path: '/companies/:id',
         component: CompanyDetail
     },
+
 ]
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
