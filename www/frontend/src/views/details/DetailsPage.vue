@@ -73,7 +73,7 @@ import HeaderContent from "@/components/header/HeaderContent";
 import FooterContent from "@/components/footer/FooterContent";
 
 export default {
-  name: "Details",
+  name: "details-page",
   components: {FooterContent, HeaderContent}
 }
 </script>
@@ -86,9 +86,9 @@ const selectDate = (val) => {
   calendar.value.selectDate(val)
 }
 
-const detailsRowClassName = ({row, rowIndex}) => {
-  return row.amount < 0 ? 'decrease' : 'addition';
-}
+// const detailsRowClassName = ({row, rowIndex}) => {
+//   return row.amount < 0 ? 'decrease' : 'addition';
+// }
 
 const items = [
   {
