@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('balances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contract_id')->constrained();
+            $table->foreignId('contract_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->decimal('amount', 9, 2);
             $table->timestamps();
         });
@@ -28,6 +28,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('balances', function (Blueprint $table) {
+            $table->dropForeign(['contract_id']);
+        });
         Schema::dropIfExists('balances');
     }
 };
