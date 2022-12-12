@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('rate_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('rate_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('number');
             $table->string('name');
             $table->timestamps();
@@ -30,6 +30,11 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('contracts', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['rate_id']);
+        });
+
         Schema::dropIfExists('contracts');
     }
 };

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('contract_service', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contract_id')->constrained();
-            $table->foreignId('service_id')->constrained();
+            $table->foreignId('contract_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('service_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->boolean('status');
             $table->timestamps();
         });
@@ -29,6 +29,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contract_services');
+        Schema::table('contract_service', function (Blueprint $table) {
+            $table->dropForeign(['contract_id']);
+            $table->dropForeign(['service_id']);
+        });
+        Schema::dropIfExists('contract_service');
     }
 };
