@@ -85,6 +85,7 @@ export default {
   },
   mounted() {
     this.fetchUserProfile();
+    this.fetchUserBalance();
   },
   methods: {
     fetchUserProfile() {
@@ -92,6 +93,15 @@ export default {
           .then(response => {
             console.log(response.data.data);
             this.userProfile = response.data.data;
+          }).catch(error => {
+        console.log(error)
+      });
+    },
+    fetchUserBalance() {
+      axios.get('/api/v1/user_balance')
+          .then(response => {
+            console.log(response.data.data);
+            this.userBalance = response.data.data;
           }).catch(error => {
         console.log(error)
       });
@@ -109,8 +119,8 @@ export default {
         phone: '',
       },
       userBalance: {
-        lastReplenishmentDate: '15.04.2021 г.',
-        amount: '100,95 ₽',
+        lastReplenishmentDate: '',
+        amount: '',
       },
       rateInformation: {
         amount: '490',

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\UserBalanceController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('companies', CompanyController::class);
 
     Route::get('/user_profile', [UserProfileController::class, 'index']);
+    Route::get('/user_balance', [UserBalanceController::class, 'index']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
