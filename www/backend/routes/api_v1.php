@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\RateController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user_profile', [UserProfileController::class, 'index']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::get('/rates', [RateController::class, 'index']);
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
