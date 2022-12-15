@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('contract_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contract_id')->constrained();
+            $table->foreignId('contract_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('target');
             $table->decimal('amount', 9, 2);
             $table->dateTime('datetime');
@@ -30,6 +30,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('contract_details', function (Blueprint $table) {
+            $table->dropForeign(['contract_id']);
+        });
         Schema::dropIfExists('contract_details');
     }
 };

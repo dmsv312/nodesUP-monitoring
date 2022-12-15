@@ -2,10 +2,14 @@
 
 namespace App\Models\Api;
 
+use App\Models\User;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
@@ -19,6 +23,9 @@ use Illuminate\Support\Carbon;
  * @property string $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property User $user
+ * @property Balance $balance
+ * @property Service[] $services
  * @method static Builder|Contract newModelQuery()
  * @method static Builder|Contract newQuery()
  * @method static Builder|Contract query()
@@ -33,4 +40,29 @@ use Illuminate\Support\Carbon;
 class Contract extends Model
 {
     use HasFactory;
+
+    /**
+     * Get User
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get Balance
+     */
+    public function balance(): HasOne
+    {
+        return $this->hasOne(Balance::class);
+    }
+
+    /**
+     * Get Services
+     * @return BelongsToMany
+     */
+    public function services(): BelongsToMany
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }
