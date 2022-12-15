@@ -2,6 +2,9 @@
 
 namespace App\Models\Api;
 
+use App\Models\Carbon\CarbonClient;
+use App\Models\Carbon\ProfileDTO;
+use App\Models\Carbon\UserInfoDTO;
 use App\Models\User;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +17,8 @@ use Illuminate\Support\Carbon;
  *
  * @property int $id
  * @property int $user_id
+ * @property int $carbon_user_id
+ * @property string $carbon_caller_id
  * @property string $lastname
  * @property string $firstname
  * @property string $middlename
@@ -39,6 +44,43 @@ use Illuminate\Support\Carbon;
 class UserProfile extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'user_id',
+        'carbon_user_id',
+        'carbon_caller_id',
+        'firstname',
+        'lastname',
+        'middlename',
+        'address',
+        'phone',
+    ];
+
+    public function updateUserProfile(User $user, ProfileDTO $profileDTO): UserInfoDTO|bool
+    {
+        $this->carbon_user_id = $profileDTO->carbonUserId;
+        $this->carbon_caller_id = $profileDTO->carbonCallerId;
+        $this->firstname = $profileDTO->firstname;
+        $this->lastname = $profileDTO->lastname;
+        $this->middlename = $profileDTO->middlename;
+        $this->address = $profileDTO->address;
+
+        $carbonClient = new CarbonClient();
+        $userInfo = $carbonClient->getWebCabinetUserInfo($user->suid);
+
+        $this->phone = $userInfo->phone;
+        //TODO - throw exception
+        if (!$this->save()) {
+            return false;
+        }
+
+        return $userInfo;
+    }
 
     /**
      * Get User

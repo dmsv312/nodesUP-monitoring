@@ -19,3 +19,6 @@ nbproject
 
 # databases dump
 /db
+
+#generated web folder
+/www/frontend/web

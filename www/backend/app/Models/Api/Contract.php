@@ -2,6 +2,7 @@
 
 namespace App\Models\Api;
 
+use App\Models\User;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,4 +34,28 @@ use Illuminate\Support\Carbon;
 class Contract extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'user_id',
+        'rate_id',
+        'number',
+        'name',
+    ];
+
+    public function updateContract(User $user, int $rateId): bool
+    {
+        $this->rate_id = $rateId;
+        $this->number = $user->name;
+        $this->name = $user->name;
+        //TODO - throw exception
+        if (!$this->save()) {
+            return false;
+        }
+        return true;
+    }
 }
