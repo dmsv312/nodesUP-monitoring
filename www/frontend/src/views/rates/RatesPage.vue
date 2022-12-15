@@ -12,7 +12,9 @@
     </div>
     <h1>Тарифные планы</h1>
     <div class="dashboard">
-      <rate-list></rate-list>
+      <rate-list
+          :rates="rates"
+      />
     </div>
   </div>
   <footer-content></footer-content>
@@ -25,7 +27,7 @@ import RateList from "@/components/ReteList";
 import axios from "axios";
 
 export default {
-  name: "rate-page",
+  name: "rates-page",
   components: {
     FooterContent,
     HeaderContent,
@@ -33,6 +35,7 @@ export default {
   },
   mounted() {
     this.fetchUserProfile();
+    this.getRates()
   },
   methods: {
     fetchUserProfile() {
@@ -43,6 +46,14 @@ export default {
         console.log(error)
       });
     },
+    getRates() {
+      axios.get('/api/v1/rates')
+          .then(response => {
+            this.rates = response.data.data;
+          }).catch(error => {
+        console.log(error)
+      });
+    }
   },
   data() {
     return {
@@ -55,6 +66,7 @@ export default {
         email: '',
         phone: '',
       },
+      rates: [],
     }
   }
 }
@@ -67,5 +79,4 @@ export default {
 
 <style lang="scss" scoped>
 @import 'rates.scss';
-@import '../../assets/styles/rate-card';
 </style>

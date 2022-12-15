@@ -4,7 +4,7 @@ import LoginPage from '../views/login/LoginPage.vue'
 import DetailsPage from '../views/details/DetailsPage.vue'
 import CompanyPage from "@/pages/CompanyPage";
 import CompanyDetail from "@/components/CompanyDetail";
-import TariffPlans from "@/views/tariffPlans/TariffPlans";
+import RatesPage from "@/views/rates/RatesPage";
 
 const routes = [
     {
@@ -23,17 +23,16 @@ const routes = [
         component: DetailsPage
     },
     {
-        path: '/tariff-plans',
-        name: 'TariffPlans',
-        component: TariffPlans
-    },
-    {
         path: '/companies',
         component: CompanyPage
     },
     {
         path: '/companies/:id',
         component: CompanyDetail
+    },
+    {
+        path: '/rates',
+        component: RatesPage
     },
 
 ]
