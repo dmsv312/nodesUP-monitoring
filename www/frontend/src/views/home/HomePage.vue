@@ -106,7 +106,7 @@ export default {
   data() {
     return {
       userProfile: {
-        contractNumber: 'NN 234-2412',
+        contractNumber: '',
         firstname: '',
         lastname: '',
         middlename: '',
