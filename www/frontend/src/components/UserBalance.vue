@@ -5,7 +5,7 @@
       Последнее пополнение баланса: <br>
       <span>{{ formattedLastReplenishmentDate }}</span>
     </p>
-    <div class="amount">{{ amount }}</div>
+    <div class="amount">{{ formattedAmount }}</div>
     <el-button type="primary">Пополнить</el-button>
   </div>
 </template>
@@ -23,6 +23,10 @@ export default {
   computed: {
     formattedLastReplenishmentDate() {
       return this.formatDate(this.lastReplenishmentDate);
+    },
+    formattedAmount() {
+      this.amount.replace(/\./,',');
+      return this.amount + ' ₽';
     }
   }
 }
