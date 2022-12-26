@@ -25,8 +25,7 @@ export default {
       return this.formatDate(this.lastReplenishmentDate);
     },
     formattedAmount() {
-      this.amount.replace(/\./,',');
-      return this.amount + ' ₽';
+      return this.amount.replace(/\./,',') + ' ₽';
     }
   }
 }
