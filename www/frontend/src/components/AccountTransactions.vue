@@ -10,7 +10,7 @@
       <transaction-item
           v-for="transaction in transactions"
           :type="transaction.type"
-          :date="transaction.date"
+          :datetime="transaction.datetime"
           :amount="transaction.amount"
           :description="transaction.description"
           :key="transaction.id"

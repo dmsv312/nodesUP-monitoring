@@ -84,6 +84,7 @@ export default {
   mounted() {
     this.fetchUserProfile();
     this.fetchUserBalance();
+    this.fetchLastTransactions();
   },
   methods: {
     fetchUserProfile() {
@@ -101,6 +102,14 @@ export default {
         }).catch(error => {
           // console.log(error)
         });
+    },
+    fetchLastTransactions() {
+      axios.get('/api/v1/contract_details?on-page=4')
+          .then(response => {
+            this.transactions = response.data.data;
+          }).catch(error => {
+        // console.log(error)
+      });
     },
   },
   data() {
@@ -127,32 +136,28 @@ export default {
       },
       transactions: [
         {
-          id: 1,
-          type: 'decrease',
-          date: '01.04.2021',
-          amount: '- 236₽',
-          description: 'Услуга из D+: трафик (590₽)',
+          type: '',
+          datetime: '',
+          amount: '',
+          description: '',
         },
         {
-          id: 2,
-          type: 'addition',
-          date: '25.03.2021',
-          amount: '+ 236₽',
-          description: 'Зачисление платежа',
+          type: '',
+          datetime: '',
+          amount: '',
+          description: '',
         },
         {
-          id: 3,
-          type: 'decrease',
-          date: '01.04.2021',
-          amount: '- 236₽',
-          description: 'Услуга из D+: трафик (590₽)',
+          type: '',
+          datetime: '',
+          amount: '',
+          description: '',
         },
         {
-          id: 4,
-          type: 'addition',
-          date: '25.03.2021',
-          amount: '+ 236₽',
-          description: 'Зачисление платежа',
+          type: '',
+          datetime: '',
+          amount: '',
+          description: '',
         },
       ]
     };

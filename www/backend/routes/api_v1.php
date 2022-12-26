@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\ContractDetailController;
 use App\Http\Controllers\Api\RateController;
 use App\Http\Controllers\Api\ContractServiceController;
-use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\UserBalanceController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\AuthController;
@@ -28,10 +28,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/user_profile', [UserProfileController::class, 'index']);
     Route::get('/user_balance', [UserBalanceController::class, 'index']);
+    Route::get('/contract_details', [ContractDetailController::class, 'index']);
+    Route::get('/rates', [RateController::class, 'index']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
-
-    Route::get('/rates', [RateController::class, 'index']);
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
