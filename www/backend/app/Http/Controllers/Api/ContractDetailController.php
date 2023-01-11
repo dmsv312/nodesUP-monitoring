@@ -54,7 +54,7 @@ class ContractDetailController
         );
 
         return new ContractDetailCollection(
-            $query->paginate($onPage)
+            $query->paginate($onPage, '*', 'details',request('page'))
         );
     }
 }

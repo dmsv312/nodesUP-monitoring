@@ -16,7 +16,7 @@
           :key="transaction.id"
       />
     </div>
-    <router-link to="/" class="more-link">Смотреть все</router-link>
+    <router-link to="/details" class="more-link">Смотреть все</router-link>
   </div>
 
   <div class="widget details" v-else>
