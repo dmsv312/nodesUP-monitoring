@@ -1,5 +1,5 @@
 <template>
-  <div class="widget">
+  <div class="widget widget-userprofile">
     <div>
       <img src="../assets/images/avatar.png" class="avatar" alt="avatar">
     </div>
@@ -44,6 +44,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

@@ -1,33 +1,52 @@
 <template>
-  <div class="widget services" v-if="services.length > 0">
+  <div class="widget services">
     <h2>Мои услуги</h2>
     <p>Список подключенных и доступных услуг</p>
     <service-item
         v-for="service in services"
-        :title="service.title"
-        :description="service.description"
+        @change="activateService(service)"
+        :service="service"
         :key="service.id"
     />
-  </div>
-
-  <div class="widget services" v-else>
-    <h2>No services</h2>
   </div>
 </template>
 
 <script>
 import ServiceItem from "@/components/ServiceItem";
+import axios from "axios";
 export default {
   name: 'services-list',
   components: {
     ServiceItem,
   },
-  props: {
-    services: {
-      type: Array,
-      required: true
-    },
+  data() {
+    return {
+      services: []
+    }
   },
+  mounted() {
+    this.fetchContractServices();
+  },
+  methods: {
+    fetchContractServices() {
+      axios.get('/api/v1/contract_services')
+          .then(response => {
+            this.services = response.data.data;
+          }).catch(error => {
+        // console.log(error)
+      });
+    },
+    activateService(service) {
+      console.log('activateService',service);
+      axios.put('/api/v1/contract_services/' + service.id, service)
+          .then(response => {
+            this.fetchContractServices();
+          })
+          .catch(error => {
+            // console.log(error)
+          });
+    },
+  }
 }
 </script>
 

@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\ContractDetailController;
+use App\Http\Controllers\Api\RateController;
+use App\Http\Controllers\Api\ContractServiceController;
+use App\Http\Controllers\Api\UserBalanceController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -19,8 +23,13 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('companies', CompanyController::class);
+    //Route::apiResource('services', ServiceController::class); // все возможные услуги
+    Route::apiResource('contract_services', ContractServiceController::class); // услуги по договору
 
     Route::get('/user_profile', [UserProfileController::class, 'index']);
+    Route::get('/user_balance', [UserBalanceController::class, 'index']);
+    Route::get('/contract_details', [ContractDetailController::class, 'index']);
+    Route::get('/rates', [RateController::class, 'index']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

@@ -1,7 +1,7 @@
 <template>
   <header-content
-    :firstname="userProfile.firstname"
-    :lastname="userProfile.lastname">
+      :firstname="userProfile.firstname"
+      :lastname="userProfile.lastname">
   </header-content>
   <div class="content">
     <div class="breadcrumbs">
@@ -11,13 +11,13 @@
     <div class="dashboard">
       <div class="left-content">
         <user-profile
-          :contract-number="userProfile.contractNumber"
-          :first-name="userProfile.firstname"
-          :last-name="userProfile.lastname"
-          :middle-name="userProfile.middlename"
-          :address="userProfile.address"
-          :email="userProfile.email"
-          :phone="userProfile.phone">
+            :contract-number="userProfile.contractNumber"
+            :first-name="userProfile.firstname"
+            :last-name="userProfile.lastname"
+            :middle-name="userProfile.middlename"
+            :address="userProfile.address"
+            :email="userProfile.email"
+            :phone="userProfile.phone">
         </user-profile>
 
         <div class="widget blue need-help">
@@ -29,30 +29,28 @@
       <div class="content">
         <div>
           <rate-information
-            :amount="rateInformation.amount"
-            :speed="rateInformation.speed"
-            :channels="rateInformation.channels"
-            :hd-channels="rateInformation.hdChannels"
-            :symbol="rateInformation.symbol">
+              :amount="rateInformation.amount"
+              :speed="rateInformation.speed"
+              :channels="rateInformation.channels"
+              :hd-channels="rateInformation.hdChannels"
+              :symbol="rateInformation.symbol">
           </rate-information>
         </div>
 
         <div>
           <user-balance
-            :last-replenishment-date="userBalance.lastReplenishmentDate"
-            :amount="userBalance.amount">
+              :last-replenishment-date="userBalance.lastReplenishmentDate"
+              :amount="userBalance.amount">
           </user-balance>
         </div>
 
         <div>
-          <services-list
-            :services="services">
-          </services-list>
+          <services-list />
         </div>
 
         <div>
           <account-transactions
-            :transactions="transactions">
+              :transactions="transactions">
           </account-transactions>
         </div>
 
@@ -85,22 +83,39 @@ export default {
   },
   mounted() {
     this.fetchUserProfile();
+    this.fetchUserBalance();
+    this.fetchLastTransactions();
   },
   methods: {
     fetchUserProfile() {
       axios.get('/api/v1/user_profile')
+        .then(response => {
+          this.userProfile = response.data.data;
+        }).catch(error => {
+          // console.log(error)
+        });
+    },
+    fetchUserBalance() {
+      axios.get('/api/v1/user_balance')
+        .then(response => {
+          this.userBalance = response.data.data;
+        }).catch(error => {
+          // console.log(error)
+        });
+    },
+    fetchLastTransactions() {
+      axios.get('/api/v1/contract_details?on-page=4')
           .then(response => {
-            console.log(response.data.data);
-            this.userProfile = response.data.data;
+            this.transactions = response.data.data;
           }).catch(error => {
-        console.log(error)
+        // console.log(error)
       });
     },
   },
   data() {
     return {
       userProfile: {
-        contractNumber: 'NN 234-2412',
+        contractNumber: '',
         firstname: '',
         lastname: '',
         middlename: '',
@@ -109,8 +124,8 @@ export default {
         phone: '',
       },
       userBalance: {
-        lastReplenishmentDate: '15.04.2021 г.',
-        amount: '100,95 ₽',
+        lastReplenishmentDate: '',
+        amount: '',
       },
       rateInformation: {
         amount: '490',
@@ -119,56 +134,30 @@ export default {
         hdChannels: '20',
         symbol: 'C',
       },
-      services: [
-        {
-          id: 1,
-          title: 'Автоплатеж',
-          description: 'Автоматическое пополнение счета при отрицательном балансе',
-        },
-        {
-          id: 2,
-          title: 'Отложенный платеж',
-          description: 'Пользуйтесь интернетом при отрицательном балансе, а платите потом',
-        },
-        {
-          id: 3,
-          title: 'Добровольная блокировка',
-          description: 'Приостановите списание абонентской платы на то время, когда вы не пользуетесь интернетом',
-        },
-        {
-          id: 4,
-          title: 'Белый IP-адрес',
-          description: 'Белый',
-        },
-      ],
       transactions: [
         {
-          id: 1,
-          type: 'decrease',
-          date: '01.04.2021',
-          amount: '- 236₽',
-          description: 'Услуга из D+: трафик (590₽)',
+          type: '',
+          datetime: '',
+          amount: '',
+          description: '',
         },
         {
-          id: 2,
-          type: 'addition',
-          date: '25.03.2021',
-          amount: '+ 236₽',
-          description: 'Зачисление платежа',
+          type: '',
+          datetime: '',
+          amount: '',
+          description: '',
         },
         {
-          id: 3,
-          type: 'decrease',
-          date: '01.04.2021',
-          amount: '- 236₽',
-          description: 'Услуга из D+: трафик (590₽)',
+          type: '',
+          datetime: '',
+          amount: '',
+          description: '',
         },
         {
-          id: 4,
-          type: 'addition',
-          date: '25.03.2021',
-          amount: '+ 236₽',
-          description: 'Зачисление платежа',
+          type: '',
+          datetime: '',
+          amount: '',
+          description: '',
         },
       ]
     };
@@ -177,6 +166,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import 'home.scss';
-  @import '../../assets/styles/rate-card';
+@import 'home.scss';
+@import '../../assets/styles/rate-card';
 </style>

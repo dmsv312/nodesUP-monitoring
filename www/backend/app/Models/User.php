@@ -11,6 +11,7 @@ use Exception;
 use Hash;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,6 +50,7 @@ use Throwable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property UserProfile $userProfile
+ * @property Contract $contract
  */
 class User extends Authenticatable
 {
@@ -131,6 +133,16 @@ class User extends Authenticatable
     public function userProfile(): HasOne
     {
         return $this->hasOne(UserProfile::class);
+    }
+
+    /**
+     * Get Contract
+     *
+     * @return HasOne
+     */
+    public function contract(): HasOne
+    {
+        return $this->hasOne(Contract::class);
     }
 
 }

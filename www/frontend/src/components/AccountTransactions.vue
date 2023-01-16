@@ -10,13 +10,13 @@
       <transaction-item
           v-for="transaction in transactions"
           :type="transaction.type"
-          :date="transaction.date"
+          :datetime="transaction.datetime"
           :amount="transaction.amount"
           :description="transaction.description"
           :key="transaction.id"
       />
     </div>
-    <router-link to="/" class="more-link">Смотреть все</router-link>
+    <router-link to="/details" class="more-link">Смотреть все</router-link>
   </div>
 
   <div class="widget details" v-else>

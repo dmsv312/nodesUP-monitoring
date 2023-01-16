@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../views/home/HomePage.vue'
 import LoginPage from '../views/login/LoginPage.vue'
-import DetailsPage from '../views/details/DetailsPage.vue'
+import DetailsPage from '@/pages/DetailsPage'
 import CompanyPage from "@/pages/CompanyPage";
 import CompanyDetail from "@/components/CompanyDetail";
-import TariffPlans from "@/views/tariffPlans/TariffPlans";
+import RatesPage from "@/views/rates/RatesPage";
 
 const routes = [
     {
@@ -23,17 +23,16 @@ const routes = [
         component: DetailsPage
     },
     {
-        path: '/tariff-plans',
-        name: 'TariffPlans',
-        component: TariffPlans
-    },
-    {
         path: '/companies',
         component: CompanyPage
     },
     {
         path: '/companies/:id',
         component: CompanyDetail
+    },
+    {
+        path: '/rates',
+        component: RatesPage
     },
 
 ]
