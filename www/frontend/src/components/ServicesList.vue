@@ -32,19 +32,15 @@ export default {
       axios.get('/api/v1/contract_services')
           .then(response => {
             this.services = response.data.data;
-          }).catch(error => {
-        // console.log(error)
-      });
+          }).catch(() => {});
     },
     activateService(service) {
       console.log('activateService',service);
       axios.put('/api/v1/contract_services/' + service.id, service)
-          .then(response => {
+          .then(() => {
             this.fetchContractServices();
           })
-          .catch(error => {
-            // console.log(error)
-          });
+          .catch(() => {});
     },
   }
 }

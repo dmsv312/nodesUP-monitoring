@@ -91,25 +91,19 @@ export default {
       axios.get('/api/v1/user_profile')
         .then(response => {
           this.userProfile = response.data.data;
-        }).catch(error => {
-          // console.log(error)
-        });
+        }).catch(() => {});
     },
     fetchUserBalance() {
       axios.get('/api/v1/user_balance')
         .then(response => {
           this.userBalance = response.data.data;
-        }).catch(error => {
-          // console.log(error)
-        });
+        }).catch(() => {});
     },
     fetchLastTransactions() {
       axios.get('/api/v1/contract_details?on-page=4')
           .then(response => {
             this.transactions = response.data.data;
-          }).catch(error => {
-        // console.log(error)
-      });
+          }).catch(() => {});
     },
   },
   data() {

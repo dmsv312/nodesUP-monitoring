@@ -104,7 +104,6 @@ export default {
   },
   methods: {
     fetchTransactions() {
-      console.log('page', this.page);
       axios.get('/api/v1/contract_details?page=' + (this.page + 1))
           .then(response => {
             this.page = response.data.meta.current_page;
@@ -116,9 +115,7 @@ export default {
                 this.transactions.push(item);
               });
             }
-          }).catch(error => {
-        // console.log(error)
-      });
+          }).catch(() => {});
     },
   }
 }
