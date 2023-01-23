@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BlockingController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\ContractDetailController;
 use App\Http\Controllers\Api\RateController;
@@ -25,11 +26,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('companies', CompanyController::class);
     //Route::apiResource('services', ServiceController::class); // все возможные услуги
     Route::apiResource('contract_services', ContractServiceController::class); // услуги по договору
+    Route::apiResource('blocking', BlockingController::class)->only(['index', 'update']);
 
     Route::get('/user_profile', [UserProfileController::class, 'index']);
     Route::get('/user_balance', [UserBalanceController::class, 'index']);
     Route::get('/contract_details', [ContractDetailController::class, 'index']);
+
+    //TODO - unite rates after adding update action
     Route::get('/rates', [RateController::class, 'index']);
+    Route::get('/get_rate_by_user', [RateController::class, 'getRateByUser']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
