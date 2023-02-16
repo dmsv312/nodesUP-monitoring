@@ -21,9 +21,13 @@ class BalanceResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'contract_id' => $this->contract_id,
+            'contractId' => $this->contract_id,
+            'isBlocked' => (bool)$this->contract->is_blocked,
             'amount' => $this->amount,
-            'lastReplenishmentDate' => date('c', strtotime($this->lastReplenishment->datetime)),
+            'lastReplenishmentDate' => date('c', strtotime($this->lastReplenishment?->datetime)),
+            'blockingDate' => $this->blocking_date,
+            'recommendedPaymentAmount' => $this->recommended_payment_amount,
+            'minimumPaymentAmount' => $this->minimum_payment_amount,
             'createdAt' => $this->created_at,
         ];
     }

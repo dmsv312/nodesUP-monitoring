@@ -21,10 +21,13 @@ use Illuminate\Support\Carbon;
  * @property int $rate_id
  * @property string $number
  * @property string $name
+ * @property bool $is_blocked
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property User $user
  * @property Balance $balance
+ * @property Blocking $blocking
+ * @property Rate $rate
  * @property Service[] $services
  * @method static Builder|Contract newModelQuery()
  * @method static Builder|Contract newQuery()
@@ -58,12 +61,28 @@ class Contract extends Model
     }
 
     /**
+     * Get Blocking
+     */
+    public function blocking(): HasOne
+    {
+        return $this->hasOne(Blocking::class);
+    }
+
+    /**
      * Get Services
      * @return BelongsToMany
      */
     public function services(): BelongsToMany
     {
         return $this->belongsToMany(Service::class);
+    }
+
+    /**
+     * Get Rate
+     */
+    public function rate(): HasOne
+    {
+        return $this->hasOne(Rate::class, 'id', 'rate_id');
     }
 
     /**
@@ -78,11 +97,12 @@ class Contract extends Model
         'name',
     ];
 
-    public function updateContract(User $user, int $rateId): bool
+    public function updateContract(User $user, int $rateId, bool $isBlocked): bool
     {
         $this->rate_id = $rateId;
         $this->number = $user->name;
         $this->name = $user->name;
+        $this->is_blocked = $isBlocked;
         //TODO - throw exception
         if (!$this->save()) {
             return false;

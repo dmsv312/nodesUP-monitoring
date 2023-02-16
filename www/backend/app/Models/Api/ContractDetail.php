@@ -33,6 +33,13 @@ class ContractDetail extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'contract_id',
+        'target',
+        'amount',
+        'datetime',
+    ];
+
     const TYPE_ADDITION = 'addition';
     const TYPE_DECREASE = 'decrease';
 

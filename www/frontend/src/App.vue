@@ -1,20 +1,28 @@
 <template>
-  <router-view v-if="$store.state.isAuth"></router-view>
-  <login-page v-else></login-page>
+  <router-view></router-view>
 </template>
 
 <script>
 import axios from "axios";
-import LoginPage from "@/views/login/LoginPage";
 
 export default {
   name: 'App',
   components: {
-    LoginPage,
+
   },
   mounted() {
-    if (localStorage.token) {
+    if (localStorage.token && localStorage.role === 'admin') {
+      this.setAdminState();
       this.setToken();
+      this.$router.push({ name: 'migrate'});
+    }
+    if (localStorage.token && localStorage.role === 'user') {
+      this.setUserState();
+      this.setToken();
+      this.$router.push({ name: 'home'})
+    }
+    if (!localStorage.token) {
+      this.$router.push({ name: 'login'})
     }
     this.getCsrf();
   },
@@ -28,8 +36,19 @@ export default {
       this.$store.commit('setToken', localStorage.token);
       this.$store.commit('setIsAuth', true);
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$store.state.token;
-    }
-  }
+    },
+    setUserState() {
+      this.$store.commit('setRole', 'user');
+    },
+    setAdminState() {
+      this.$store.commit('setRole', 'admin');
+    },
+  },
+  data() {
+    return {
+
+    };
+  },
 }
 </script>
 

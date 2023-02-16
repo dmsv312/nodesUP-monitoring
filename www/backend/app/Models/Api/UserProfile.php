@@ -70,11 +70,11 @@ class UserProfile extends Model
         $this->lastname = $profileDTO->lastname;
         $this->middlename = $profileDTO->middlename;
         $this->address = $profileDTO->address;
+        $this->phone = $profileDTO->phone;
 
         $carbonClient = new CarbonClient();
         $userInfo = $carbonClient->getWebCabinetUserInfo($user->suid);
 
-        $this->phone = $userInfo->phone;
         //TODO - throw exception
         if (!$this->save()) {
             return false;

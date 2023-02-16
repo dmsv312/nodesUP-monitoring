@@ -5,25 +5,33 @@ import DetailsPage from '@/pages/DetailsPage'
 import CompanyPage from "@/pages/CompanyPage";
 import CompanyDetail from "@/components/CompanyDetail";
 import RatesPage from "@/views/rates/RatesPage";
+import MigrateInfo from "@/views/migrate/MigrateInfo.vue";
+import RestoreLoginPage from "@/views/login/RestoreLoginPage.vue";
 
 const routes = [
     {
         path: '/',
-        name: 'Home',
+        name: 'home',
         component: HomePage
     },
     {
         path: '/login',
-        name: 'Login',
+        name: 'login',
         component: LoginPage
     },
     {
+        path: '/restore',
+        name: 'restore',
+        component: RestoreLoginPage,
+    },
+    {
         path: '/details',
-        name: 'Details',
+        name: 'details',
         component: DetailsPage
     },
     {
         path: '/companies',
+        name: 'companies',
         component: CompanyPage
     },
     {
@@ -34,7 +42,11 @@ const routes = [
         path: '/rates',
         component: RatesPage
     },
-
+    {
+        path: '/migrate',
+        name: 'migrate',
+        component: MigrateInfo,
+    },
 ]
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),

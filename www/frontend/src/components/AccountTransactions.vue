@@ -2,11 +2,6 @@
   <div class="widget details" v-if="transactions.length > 0">
     <h2>Детализация</h2>
     <div>
-      <p>
-        Последнее пополнение баланса: <br>
-        <span>{{ lastReplenishmentDate }}</span>
-      </p>
-
       <transaction-item
           v-for="transaction in transactions"
           :type="transaction.type"
@@ -36,7 +31,6 @@ export default {
       type: Array,
       required: true
     },
-    lastReplenishmentDate: String,
   },
 }
 </script>

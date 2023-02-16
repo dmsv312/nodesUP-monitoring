@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Api\Balance;
+use App\Models\Api\Blocking;
 use App\Models\Api\Contract;
+use App\Models\Api\ContractDetail;
 use App\Models\Api\Rate;
 use App\Models\Api\UserProfile;
 use App\Models\Carbon\CarbonClient;
@@ -11,7 +13,6 @@ use Exception;
 use Hash;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,6 +28,7 @@ use Throwable;
  * @property string $email
  * @property string $password
  * @property int $id
+ * @property int $role
  * @property string $suid
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string|null $remember_token
@@ -55,6 +57,9 @@ use Throwable;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    public const ROLE_USER = 1;
+    public const ROLE_ADMIN = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -104,6 +109,8 @@ class User extends Authenticatable
             $this->name = $name;
             $this->password = Hash::make($password);
             $this->suid = $profile->suid;
+            $this->email = $profile->email;
+
             $this->save();
 
             $userProfile = UserProfile::firstOrNew(['user_id' => $this->id]);
@@ -111,7 +118,20 @@ class User extends Authenticatable
 
             $rate = Rate::firstWhere(['carbon_rate_id' => $userInfo->rateId]);
             $contract = Contract::firstOrNew(['user_id' => $this->id]);
-            $contract->updateContract($this, $rate->id);
+            $contract->updateContract($this, $rate->id, $userInfo->isBlocked);
+
+            $balance = Balance::firstOrNew(['contract_id' => $contract->id]);
+            $balance->updateBalance($userInfo, $rate->price);
+
+            $carbonLastFinanceOperation = $carbonClient->getLastFinanceOperation($userProfile->carbon_caller_id, '2022-01-01', '2023-01-31');
+            $contractDetails = ContractDetail::firstOrCreate([
+                'contract_id' => $contract->id,
+                'amount' => $carbonLastFinanceOperation->amount,
+                'datetime' => $carbonLastFinanceOperation->date,
+            ]);
+
+            $blocking = Blocking::firstOrNew(['contract_id' => $contract->id]);
+            $blocking->updateBlocking($profile->ownDisabledStart, $profile->ownDisabledEnd);
 
             DB::commit();
         } catch (QueryException $e) {
@@ -124,6 +144,7 @@ class User extends Authenticatable
             'userInfoDTO' => $userInfo,
             'rate' => $rate,
             'contract' => $contract,
+            'finance' => $carbonLastFinanceOperation
         ];
     }
 

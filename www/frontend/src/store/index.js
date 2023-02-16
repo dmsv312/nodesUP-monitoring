@@ -4,6 +4,7 @@ export default createStore({
     state: {
         token: '',
         isAuth: false,
+        role: '',
     },
     getters: {
 
@@ -14,6 +15,9 @@ export default createStore({
         },
         setIsAuth(state, isAuth) {
             state.isAuth = isAuth
+        },
+        setRole(state, role) {
+            state.role = role
         },
     },
     actions: {

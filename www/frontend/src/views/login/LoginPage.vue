@@ -20,7 +20,7 @@
             <el-button type="primary" @click="login">Войти</el-button>
           </div>
           <div class="forgot-password">
-            Забыли пароль? <router-link to="/">Восстановить</router-link>
+            Забыли пароль? <router-link to="/restore">Восстановить</router-link>
           </div>
         </form>
       </div>
@@ -36,22 +36,30 @@ export default {
   methods: {
     login() {
       axios.post('/api/v1/login', {
-        email: this.username,
+        name: this.username,
         password: this.password
       }).then(response => {
         console.log(response);
-        this.setToken(response.data.token);
+        this.setTokenAndRole(response.data.token, response.data.role);
+        if (response.data.role === 'admin') {
+          this.$router.push({ name: 'migrate' });
+        }
+        if (response.data.role === 'user') {
+          this.$router.push({ name: 'home' });
+        }
       }).catch(error => {
-        console.log(error)
+        console.log(error);
+        console.log(error.response.data.error);
       });
     },
-    setToken(token) {
+    setTokenAndRole(token, role) {
       localStorage.token = token;
+      localStorage.role = role;
       this.$store.commit('setToken', localStorage.token);
       this.$store.commit('setIsAuth', true);
+      this.$store.commit('setRole', role);
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$store.state.token;
     },
-
   },
   data() {
     return {

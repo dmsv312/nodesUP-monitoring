@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\Api\ContractdetailCollection;
+use App\Http\Resources\Api\ContractDetailCollection;
 use App\Models\Api\ContractDetail;
 use App\Models\User;
 use http\Exception\BadQueryStringException;

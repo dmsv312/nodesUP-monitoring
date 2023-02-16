@@ -10,8 +10,12 @@ use stdClass;
  * @property string $middlename
  * @property string $lastname
  * @property string $address
+ * @property string $phone
+ * @property string $email
  * @property int $carbonUserId
  * @property int $carbonCallerId
+ * @property string $ownDisabledStart
+ * @property string $ownDisabledEnd
  */
 class ProfileDTO
 {
@@ -24,6 +28,12 @@ class ProfileDTO
         $this->lastname = $fio[0];
         $this->firstname = $fio[1];
         $this->middlename = $fio[2];
-        $this->address = $carbonProfile->user->abonent->__home . ' ' . $carbonProfile->user->abonent->a_home_number;
+        //TODO - find a right address
+        $this->address = 'кв. ' . $carbonProfile->user->abonent->a_home_number;
+//        $this->address = $carbonProfile->user->home->unrestricted_value . ', кв. ' . $carbonProfile->user->abonent->a_home_number;
+        $this->phone = $carbonProfile->user->abonent->sms ?? null;
+        $this->email = $carbonProfile->user->abonent->email ?? null;
+        $this->ownDisabledStart = $carbonProfile->user->abonent->own_disabled_start;
+        $this->ownDisabledEnd = $carbonProfile->user->abonent->own_disabled_end;
     }
 }
