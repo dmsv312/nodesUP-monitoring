@@ -53,6 +53,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 // Common unprotected routes
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+// Common unprotected routes
+Route::get('/test', [AuthController::class, 'test'])->name('test');
 
 Route::post('/restore_code', [AuthController::class, 'getRestoreCode']);
 Route::post('/restore', [AuthController::class, 'restore']);
