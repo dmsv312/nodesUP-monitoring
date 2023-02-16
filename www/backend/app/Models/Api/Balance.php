@@ -2,6 +2,7 @@
 
 namespace App\Models\Api;
 
+use App\Models\Carbon\UserInfoDTO;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +15,11 @@ use Illuminate\Support\Carbon;
  *
  * @property int $id
  * @property int $contract_id
+ //TODO - make amount float
  * @property string $amount
+ * @property string $blocking_date
+ * @property float $recommended_payment_amount
+ * @property float $minimum_payment_amount
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Contract $contract
@@ -27,10 +32,20 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Balance whereCreatedAt($value)
  * @method static Builder|Balance whereId($value)
  * @method static Builder|Balance whereUpdatedAt($value)
+ *
+ * * @mixin \Eloquent
  */
 class Balance extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'contract_id',
+        'amount',
+        'blocking_date',
+        'recommended_payment_amount',
+        'minimum_payment_amount',
+    ];
 
     /**
      * Get Contract
@@ -49,5 +64,18 @@ class Balance extends Model
                     $query->where('amount', '>', 0);
                 }
             );
+    }
+
+    public function updateBalance(UserInfoDTO $userInfo, float $ratePrice): bool
+    {
+        $this->amount = $userInfo->balance;
+        $this->blocking_date = date('Y-m-d H:i:s', strtotime($userInfo->blockingDate));
+        $this->recommended_payment_amount = $ratePrice - $this->amount;
+        $this->minimum_payment_amount = $userInfo->minimumPaymentAmount;
+        //TODO - throw exception
+        if (!$this->save()) {
+            return false;
+        }
+        return true;
     }
 }

@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
  * @property string $speed
  * @property string $channels
  * @property string $hd_channels
- * @property string $price
+ * @property float $price
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|Rate newModelQuery()
