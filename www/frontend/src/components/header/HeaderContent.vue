@@ -18,10 +18,7 @@
         <span>{{ firstname }} {{ lastname }}</span>
       </router-link>
       <div>
-        <el-button type="primary" @click="logout">Logout</el-button>
-      </div>
-      <div>
-        <el-button type="primary" @click="$router.push('/companies')">Example</el-button>
+        <el-button type="primary" @click="logout">Выйти</el-button>
       </div>
     </div>
   </header>

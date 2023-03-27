@@ -27,6 +27,7 @@ use Illuminate\Support\Carbon;
  * @property User $user
  * @property Balance $balance
  * @property Blocking $blocking
+ * @property PromisePay $promisePay
  * @property Rate $rate
  * @property Service[] $services
  * @method static Builder|Contract newModelQuery()
@@ -66,6 +67,14 @@ class Contract extends Model
     public function blocking(): HasOne
     {
         return $this->hasOne(Blocking::class);
+    }
+
+    /**
+     * Get PromisePay
+     */
+    public function promisePay(): HasOne
+    {
+        return $this->hasOne(PromisePay::class);
     }
 
     /**

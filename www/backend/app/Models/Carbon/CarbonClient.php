@@ -10,6 +10,7 @@ class CarbonClient
     public const CALLER_INFO_URL = 'http://84.237.50.63:8082/rest_api/v2/Abonents/';
     public const CALLER_BLOCKING_INFO_URL = 'http://84.237.50.63:8082/rest_api/v2/AbonentsBlock/';
     public const FINANCE_OPERATION_INFO_URL = 'http://84.237.50.63:8082/rest_api/v2/FinanceOperations/';
+    public const SERVICES_INFO_URL = 'http://84.237.50.63:8082/rest_api/v2/UsersUsluga/';
     public const LOGIN_METHOD = 'web_cabinet.login';
     public const USER_INFO_METHOD = 'web_cabinet.user_info';
     public const GET_METHOD = 'objects.get';
@@ -18,8 +19,10 @@ class CarbonClient
     public const FILTER_METHOD = 'objects.filter';
     public const RESET_PASSWORD_METHOD = 'web_cabinet.reset_password';
     public const SUBMIT_PASSWORD_METHOD = 'web_cabinet.submit_password';
-
     public const USER_SERVICES_INFO_METHOD = 'web_cabinet.get_usluga_list';
+    public const GET_PROMISE_PAY = 'web_cabinet.get_promise_pay_list';
+    public const ADD_PROMISE_PAY = 'web_cabinet.add_promise_pay';
+
 
     public string $error;
 
@@ -181,6 +184,76 @@ class CarbonClient
         return $result;
     }
 
+    public function getPromisePayList($suid)
+    {
+        $response = Http::asForm()->post(
+            self::USER_INFO_URL,
+            [
+                'method1' => self::GET_PROMISE_PAY,
+                'arg1' => json_encode([
+                    'suid' => $suid,
+                ])
+            ]
+        );
+
+        $result = json_decode($response->object()->result[0]);
+
+        if (isset($result->error)) {
+            return false;
+        }
+
+        return $result;
+    }
+
+    public function getPromisePayService($carbonCallerId): PromisePayDTO|bool
+    {
+        $response = Http::asForm()->post(
+            self::SERVICES_INFO_URL,
+            [
+                'method1' => self::FILTER_METHOD,
+                'arg1' => json_encode([
+                    'abonent_id' => $carbonCallerId,
+                ])
+            ]
+        );
+
+        if (isset($response->object()->error)) {
+            return false;
+        }
+
+        $result = $response->object()->result;
+
+        foreach ($result as $service) {
+            if ($service->fields->usluga_id == 111) {
+                return new PromisePayDTO($service);
+            }
+        }
+
+        return false;
+    }
+
+    public function addPromisePay($suid)
+    {
+        $response = Http::asForm()->post(
+            self::USER_INFO_URL,
+            [
+                'method1' => self::ADD_PROMISE_PAY,
+                'arg1' => json_encode([
+                    'suid' => $suid,
+                    'promise_pay_id' => 111,
+                ])
+            ]
+        );
+
+        // TODO - Добавить текст ошибки
+        if (isset($response->object()->result[0]->error)) {
+            return false;
+        }
+
+        $result = json_decode($response->object()->result[0]);
+
+        return $result;
+    }
 }
 
 

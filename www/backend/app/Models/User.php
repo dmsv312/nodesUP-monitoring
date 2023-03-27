@@ -6,6 +6,7 @@ use App\Models\Api\Balance;
 use App\Models\Api\Blocking;
 use App\Models\Api\Contract;
 use App\Models\Api\ContractDetail;
+use App\Models\Api\PromisePay;
 use App\Models\Api\Rate;
 use App\Models\Api\UserProfile;
 use App\Models\Carbon\CarbonClient;
@@ -124,14 +125,20 @@ class User extends Authenticatable
             $balance->updateBalance($userInfo, $rate->price);
 
             $carbonLastFinanceOperation = $carbonClient->getLastFinanceOperation($userProfile->carbon_caller_id, '2022-01-01', '2023-01-31');
-            $contractDetails = ContractDetail::firstOrCreate([
+            $contractDetails = ContractDetail::firstOrNew([
                 'contract_id' => $contract->id,
-                'amount' => $carbonLastFinanceOperation->amount,
+//                'amount' => $carbonLastFinanceOperation->amount,
                 'datetime' => $carbonLastFinanceOperation->date,
             ]);
+            $contractDetails->amount = $carbonLastFinanceOperation->amount;
+            $contractDetails->save();
 
             $blocking = Blocking::firstOrNew(['contract_id' => $contract->id]);
             $blocking->updateBlocking($profile->ownDisabledStart, $profile->ownDisabledEnd);
+
+            $promisePayInfo = $carbonClient->getPromisePayService($profile->carbonCallerId);
+            $promisePay = PromisePay::firstOrNew(['contract_id' => $contract->id]);
+            $promisePay->updatePromisePay($promisePayInfo);
 
             DB::commit();
         } catch (QueryException $e) {
@@ -140,6 +147,7 @@ class User extends Authenticatable
         }
 
         return [
+            'promisePayInfo' => $promisePayInfo,
             'profileDTO' => $profile,
             'userInfoDTO' => $userInfo,
             'rate' => $rate,

@@ -39,7 +39,7 @@ class Blocking extends Model
     ];
 
     /**
-     * Get User
+     * Get Contract
      */
     public function contract(): BelongsTo
     {
