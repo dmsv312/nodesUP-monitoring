@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blockings', function (Blueprint $table) {
+        Schema::create('promise_pays', function (Blueprint $table) {
             $table->id();
+            $table->integer('carbon_service_id')->nullable();
             $table->foreignId('contract_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->boolean('is_active');
             $table->dateTime('start_date')->nullable();
@@ -30,10 +31,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('blockings', function (Blueprint $table) {
+        Schema::table('promise_pays', function (Blueprint $table) {
             $table->dropForeign(['contract_id']);
         });
 
-        Schema::dropIfExists('blockings');
+        Schema::dropIfExists('promise_pays');
     }
 };

@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth:sanctum', 'isUser']], function () {
     //Route::apiResource('services', ServiceController::class); // все возможные услуги
     Route::apiResource('contract_services', ContractServiceController::class); // услуги по договору
     Route::apiResource('blocking', BlockingController::class)->only(['index', 'update']);
+    Route::apiResource('promise_pay', \App\Http\Controllers\Api\PromisePayController::class)->only(['index', 'update']);
 
     Route::get('/user_profile', [UserProfileController::class, 'index']);
     Route::get('/balance', [BalanceController::class, 'index']);

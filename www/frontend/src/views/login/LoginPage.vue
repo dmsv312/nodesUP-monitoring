@@ -30,6 +30,7 @@
 
 <script>
 import axios from "axios";
+import popupMixin from "@/mixins/popupMixin";
 
 export default {
   name: "login-page",
@@ -50,6 +51,7 @@ export default {
       }).catch(error => {
         console.log(error);
         console.log(error.response.data.error);
+        popupMixin.methods.show('Вход в кабинет', 'Неправильный логин или пароль, попробуйте ещё раз');
       });
     },
     setTokenAndRole(token, role) {
